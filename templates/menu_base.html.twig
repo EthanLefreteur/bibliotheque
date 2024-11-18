@@ -1,0 +1,11 @@
+<div class="menu" style="display: flex;flex-direction: row; gap: 10px">
+    <p><a href="{{ path('home') }}">Bibliothèque</a></p>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Connecté en tant que: {{ app.user.nomUtilisateur }}</p>
+        <p><a href="{{ path('app_logout') }}">Se déconnecter</a></p>
+    {% else %}
+        <p><a href="{{ path('app_login') }}">Se connecter</a></p>
+        <p><a href="{{ path('app_register') }}">S'enregistrer</a></p>
+    {% endif %}
+</div>
