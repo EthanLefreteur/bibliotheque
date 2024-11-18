@@ -134,6 +134,8 @@ final class AuteurController extends AbstractController
     #[Route('/{id}', name: 'app_auteur_delete', methods: ['POST'])]
     public function delete(Request $request, Auteur $auteur, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$auteur->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($auteur);
             $entityManager->flush();

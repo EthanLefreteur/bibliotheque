@@ -73,6 +73,8 @@ final class GenreLitteraireController extends AbstractController
     #[Route('/{id}', name: 'app_genre_litteraire_delete', methods: ['POST'])]
     public function delete(Request $request, GenreLitteraire $genreLitteraire, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$genreLitteraire->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($genreLitteraire);
             $entityManager->flush();
